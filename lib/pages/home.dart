@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_string_interpolations
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:imc_app/pages/resultados.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenInfo createState() => _HomeScreenInfo();
@@ -17,8 +19,8 @@ class _HomeScreenInfo extends State<HomeScreen> {
 
   bool _validate = false;
 
-  String _result;
-  String _texto1;
+  late String _result;
+  late String _texto1;
 
   @override
   void dispose() {
@@ -31,125 +33,109 @@ class _HomeScreenInfo extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 0, top: 0, bottom: 10),
-              height: 400,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('../assets/fundofit.jpg'),
-                    fit: BoxFit.cover
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(left: 0, top: 0, bottom: 10),
+          height: 400,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/fundofit.jpg'), fit: BoxFit.cover),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
+          decoration: BoxDecoration(
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black26,
+                offset: new Offset(0.0, 2.0),
+                blurRadius: 25.0,
+              )
+            ],
+            color: Colors.white,
+          ),
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Center(
+                child: Text(
+                  'Calcule Seu IMC',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  new BoxShadow(
-                    color: Colors.black26,
-                    offset: new Offset(0.0, 2.0),
-                    blurRadius: 25.0,
-                  )
-                ],
-                color: Colors.white,
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 8),
+                child: TextField(
+                  controller: _altura,
+                  style: TextStyle(fontSize: 18),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: InputDecoration(
+                    hintText: 'Altura em Cm ex: 170',
+                    errorText: _validate ? 'Valor não pode ser vazio' : null,
+                  ),
+                ),
               ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-
-                  Center(
-                    child: Text(
-                      'Calcule Seu IMC',
-                      style:
-                      TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 16, right: 16, top: 32, bottom: 8),
-                    child: TextField(
-                      controller: _altura,
-                      style: TextStyle(fontSize: 18),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      decoration: InputDecoration(
-                        hintText: 'Altura em Cm ex: 170',
-                        errorText: _validate
-                            ? 'Valor não pode ser vazio'
-                            : null,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
+              Padding(
+                padding:
                     EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                    child: TextField(
-                      controller: _peso,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      style: TextStyle(fontSize: 18),
-                      decoration: InputDecoration(
-                        hintText: 'Peso em KG ex: 70',
-                        errorText: _validate
-                            ? 'Valor não pode ser vazio'
-                            : null,
+                child: TextField(
+                  controller: _peso,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  style: TextStyle(fontSize: 18),
+                  decoration: InputDecoration(
+                    hintText: 'Peso em KG ex: 70',
+                    errorText: _validate ? 'Valor não pode ser vazio' : null,
+                  ),
+                ),
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    margin: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        color: Colors.green, shape: BoxShape.rectangle),
+                    child: Container(
+                      height: 40.0,
+                      width: 1000,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.lightBlue, // foreground
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _validate =
+                                _altura.text.isEmpty || _peso.text.isEmpty;
+                          });
+                          if (_validate != true) {
+                            calculateImc(double.parse(_altura.text),
+                                double.parse(_peso.text));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResultadosPage(
+                                  resultado: _result,
+                                  classificacao: _texto1,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text('Calcular'),
                       ),
                     ),
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        margin: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            color: Colors.green, shape: BoxShape.rectangle),
-                        child: Container(
-                          height: 40.0,
-                          width: 1000,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.lightBlue, // background
-                              onPrimary: Colors.white, // foreground
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _altura.text.isEmpty
-                                    ? _validate = true
-                                    : _validate = false;
-                                _peso.text.isEmpty
-                                    ? _validate = true
-                                    : _validate = false;
-                              });
-                              if (_validate != true) {
-                                calculateImc(double.parse(_altura.text),double.parse(_peso.text));
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ResultadosPage(
-                                          resultado: _result,
-                                          classificacao: _texto1,
-                                        ),
-                                  ),
-                                );
-                              }
-                            },
-                            child: Text('Calcular'),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-            ),
-          ],
-        ));
+                  )),
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 
   calculateImc(double altura, double peso) {
@@ -172,40 +158,4 @@ class _HomeScreenInfo extends State<HomeScreen> {
     else
       _texto1 += "Obesidade Grau IIII";
   }
-
 }
-/*  // ignore: missing_return
-  Widget _showTexto(){
-    if(double.parse(resultado) < 29.0)
-    return new Container(
-      margin: EdgeInsets.only(left: 0, top: 30, bottom: 0),
-      child: Text("Composto de amoras ajuda a perda de peso", style:TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey)),
-    );
-  }
-
-  // ignore: missing_return
-  Widget _showNeedHelpButton() {
-    if(double.parse(resultado) < 29.0)
-    return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-          child: Material(  //Wrap with Material
-          shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(22.0) ),
-          elevation: 18.0,
-          color: Color(0xFF801E48),
-          clipBehavior: Clip.antiAlias, // Add This
-          child: MaterialButton(
-          minWidth: 200.0,
-          height: 35,
-          color: Color(0xFF801E48),
-            child: new Text('Saiba Mais',
-            style: new TextStyle(fontSize: 16.0, color: Colors.white)),
-        onPressed: () {
-
-        },
-      ),
-    ));
-  }
-
-                       _showTexto(),
-                     _showNeedHelpButton(),
-* */
