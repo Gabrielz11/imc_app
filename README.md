@@ -65,16 +65,16 @@ The BMI is calculated using:
 
 ### Install dependencies
 
-```bash
-flutter pub get
-
-flutter run
-```
-
 ### pubspec.yaml
 
 ```bash
 flutter:
   assets:
     - assets/
+```
+
+```bash
+flutter pub get
+
+flutter run
 ```
