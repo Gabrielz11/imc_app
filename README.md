@@ -81,25 +81,34 @@ flutter run
 
 ## 📚 Project Background
 
-This application was developed as part of an academic project entitled:
+This project was developed as part of an academic assignment entitled:
 
-**“Projeto de Aplicativo para Auxílio a Pessoas”**  
-Authors: **Gabriel Aires & Luiz Luz**
+**“Implementação de App para Cálculo de IMC”**  
+Authors: Gabriel Aires & Luiz Carlos
 
-The project explores how a digital platform can help people improve their physical and mental well-being through the use of Body Mass Index (BMI), self-image awareness, and professional guidance.
+The goal of the project was to design and implement a mobile application capable of calculating the Body Mass Index (BMI) based on user input (height in cm and weight in kg), validating the data, and presenting a clear health classification.
 
-Although this is not a formal scientific paper, the project was based on research concepts related to health, self-esteem, and the impact of digital platforms on human behavior. The goal was to design and prototype a solution that could support people in developing healthier habits.
+The current application includes:
 
-The project investigated topics such as:
+- Input validation for height and weight
+- BMI calculation
+- Classification of the result
+- A results screen where users can review and recalculate their BMI
 
-- Body image and self-perception
-- Motivation and adherence to healthy routines
-- The influence of social media on self-esteem and mental health
-- The importance of professional guidance (nutritionists, psychologists, coaches)
+The BMI ranges and health classifications were based on data from the Brazilian Association for the Study of Obesity and Metabolic Syndrome (ABESO). :contentReference[oaicite:2]{index=2}
 
-During the validation phase, users raised questions about how they would interact with health professionals inside the app, highlighting the importance of combining technology with human support.
+This Flutter app represents the **functional MVP** delivered for the academic project.
 
-The current Flutter application represents the **first functional MVP** of this academic project.
+## 🔮 Future Vision
+
+During the development of the project and the UX prototyping phase, a broader digital health platform was envisioned. This future version could include:
+
+- User avatars and body visualization
+- Integration with health professionals
+- Personalized health plans
+- Mental health and motivation support
+
+These features are **not implemented yet** and are part of the future roadmap inspired by the original academic work.
 
 ---
 
@@ -107,23 +116,11 @@ The current Flutter application represents the **first functional MVP** of this 
 
 You can access the full academic project document here:
 
-🔗 **Project article:**  
-[Download the article (PDF)](docs/article.pdf)
+🔗 **Project article MVP:**
+[Download the MVP (PDF)](docs/article_MVP.pdf)
 
----
-
-## 🔮 Future Work & Product Vision
-
-Based on the academic project and UX prototype, the future vision includes:
-
-- User avatar and body visualization
-- Integration with health professionals (nutritionists, psychologists, coaches)
-- Personalized health and weight-loss plans
-- Mental health and motivation support
-- Progress tracking and analytics
-- Educational content for healthy lifestyle changes
-
-This roadmap connects the academic project, UX prototype, and Flutter MVP into a single coherent product vision.
+🔗 **Project article for Future:**  
+[Download the article (PDF)](docs/article_for_future.pdf)
 
 ---
 
